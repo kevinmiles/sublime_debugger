@@ -78,9 +78,19 @@ Sublime Debugger relies on two seperate gems for diffirent ruby versions. For Ru
 
 ### Unsupported ruby versions
 
-I cannot test this against all ruby versions, so I only explicity support Ruby 1.9.3 and Ruby 2.0.0. [RVM](https://wiki.archlinux.org/index.php/RVM) is a good way to have multiple ruby versions installed at once and switch between them when debugging or running normally. Sublime Debugger will use the ruby version that you set as default, so you must set either Ruby 1.9.3 or Ruby 2.0.0 as the default. Remember to reinstall the byebug or debugger gem when you change ruby versions, or else you will get an ```Connection could not be made: [Errno ##] Connection refused``` error.
+I cannot test this against all ruby versions, so I only explicity support Ruby 1.9.3, Ruby 2.0.0 and Ruby 2.1.0. [RVM](https://wiki.archlinux.org/index.php/RVM) and [rbenv](http://rbenv.org) are good ways to have multiple ruby versions installed at once. Sublime Debugger will use the ruby version that ```RVM``` or ```rbenv``` detects if configured, else it will use the version you have configured in your user settings. Remember to reinstall the byebug or debugger gem when you change ruby versions, or else you will get an ```Connection could not be made: [Errno ##] Connection refused``` error.
 
-If you need to have your ruby program running with an unspported ruby version you can manually add the version to the supported versions list. In the package's directory, which you can get to by going to ```preferences -> browse packages``` in sublime text and then opening the ```Ruby Debugger``` folder, there is a ```ruby_version_discoverer.rb``` file where you can add your ruby version.
+If you need to have your ruby program running with an unspported ruby version you can manually add the version to the supported versions list in your user settings. Go to ```Sublime Text Preferences -> Package Settings -> Ruby Debugger -> Settings - User```, and add the following, ensuring you include any specific versions you need.  If you are using ```RVM``` or ```rbenv```, ensure you specify this in ruby_binaries.
+```
+{
+  // Pointing ruby's Binaries, it can be one of the following:
+  // "rvm", "rbenv", "[path-to-ruby-executable]"
+  "ruby_binaries": "rvm",
+
+  // Which ruby versions are supported
+  "supported_ruby_versions": ["2.1.0", "2.0.0", "1.9.3"]
+}
+```
 
 ### Sublime Ruby Debugger
 
